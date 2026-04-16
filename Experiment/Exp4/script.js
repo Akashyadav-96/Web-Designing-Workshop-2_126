@@ -1,85 +1,41 @@
 function calculateResult() {
-    // Step 1: Get number of subjects
+    let numSubjects = document.getElementById("numSubjects").value;
+    let resultBox = document.getElementById("resultBox");
 
-    let numSubjects = parseInt(document.getElementById("numSubjects").value);
-    // Step 2: Validate input
-    if (isNaN(numSubjects) || numSubjects <= 0) {
-
-        alert("Please enter a valid number of subjects (greater than 0).");
+    if (numSubjects === "" || numSubjects <= 0) {
+        alert("Please enter a valid number of subjects");
         return;
     }
-    // Step 3: Collect marks using a loop
-    let totalMarks = 0;
-    let marksArray = [];
+
+    let total = 0;
+
     for (let i = 1; i <= numSubjects; i++) {
-        let mark = parseFloat(prompt("Enter marks for Subject " + i + " (out of 100):"));
-        if (isNaN(mark) || mark < 0 || mark > 100) {
-            alert("Invalid marks for Subject " + i + ". Please enter a value between 0 and 100.");
+        let marks = prompt(`Enter marks for subject ${i}:`);
+        
+        if (marks === null || marks === "" || isNaN(marks)) {
+            alert("Invalid input!");
             return;
         }
-        marksArray.push(mark);
-        totalMarks += mark;
+
+        total += parseFloat(marks);
     }
-    // Step 4: Calculate average
-    let averageMarks = totalMarks / numSubjects;
-    averageMarks = parseFloat(averageMarks.toFixed(2));
-    // Step 5: Determine grade
-    let grade;
-    let gradeClass;
-    if (averageMarks >= 90) {
-        grade = "A";
-        gradeClass = "grade-A";
-    } else if (averageMarks >= 75) {
-        grade = "B";
-        gradeClass = "grade-B";
-    } else if (averageMarks >= 60) {
-        grade = "C";
-        gradeClass = "grade-C";
-    } else if (averageMarks >= 40) {
-        grade = "D";
-        gradeClass = "grade-D";
-    } else {
-        grade = "F";
-        gradeClass = "grade-F";
-    }
-    // Step 6: Determine pass or fail
-    let resultStatus;
-    let resultClass;
-    if (averageMarks >= 40) {
-        resultStatus = "PASS";
-        resultClass = "pass";
-    } else {
-        resultStatus = "FAIL";
-        resultClass = "fail";
-    }
-    // Step 7: Display results on the webpage
-    let resultBox = document.getElementById("resultBox");
+
+    let percentage = total / numSubjects;
+
+    let grade = "";
+    if (percentage >= 90) grade = "A+";
+    else if (percentage >= 75) grade = "A";
+    else if (percentage >= 60) grade = "B";
+    else if (percentage >= 50) grade = "C";
+    else grade = "Fail";
+
+    resultBox.classList.remove("d-none");
+
     resultBox.innerHTML = `
-        <h2>📊 Result Summary</h2>
-        <div class="result-item">
-            <span>Number of Subjects</span>
-            <span class="result-value">${numSubjects}</span>
-        </div>
-        <div class="result-item">
-            <span>Total Marks</span>
-            <span class="result-value">${totalMarks}</span>
-        </div>
-        <div class="result-item">
-            <span>Average Marks</span>
-            <span class="result-value">${averageMarks} / 100</span>
-        </div>
-        <div class="result-item">
-            <span>Grade</span>
-            <span class="result-value">
-                <span class="grade-badge ${gradeClass}">${grade}</span>
-            </span>
-        </div>
-        <div class="result-item">
-            <span>Result</span>
-            <span class="result-value">
-                <span class="pass-badge ${resultClass}">${resultStatus}</span>
-            </span>
+        <div class="alert alert-success text-center">
+            <h4>Total Marks: ${total}</h4>
+            <h4>Percentage: ${percentage.toFixed(2)}%</h4>
+            <h4>Grade: ${grade}</h4>
         </div>
     `;
-    resultBox.classList.remove("hidden");
 }
