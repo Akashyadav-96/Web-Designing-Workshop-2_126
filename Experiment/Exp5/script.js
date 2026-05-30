@@ -1,4 +1,5 @@
 let employees = []; 
+
 function addEmployee() { 
     let name = document.getElementById("name").value; 
     let empId = document.getElementById("empId").value; 
@@ -22,7 +23,7 @@ function addEmployee() {
     document.getElementById("salary").value = ""; 
     document.getElementById("dept").value = ""; 
 } 
- 
+
 function displayEmployees() { 
     let output = "<h3>All Employees</h3>"; 
     employees.forEach(emp => { 
@@ -64,7 +65,7 @@ function averageSalary() {
     document.getElementById("output").innerHTML = 
         "<h3>Average Salary: ₹" + avg.toFixed(2) + "</h3>"; 
 } 
- 
+
 function countDepartment() { 
     let deptName = prompt("Enter Department Name:"); 
     let count = employees.filter(emp => emp.department === deptName).length; 
