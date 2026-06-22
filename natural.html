@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="container">
+        <h2 id="head">NATURAL NUMBER SUM CALCULATOR</h2>
+        <form id="number" >
+            <label for="number1">enter the number</label>
+            <input id="number1" placeholder="enter number" type="number" > 
+            
+            
+            </form>
+            <button id="btn" >click me for sum</button>
+<h3 id="res"></h3>
+    </div>
+    <script>
+        document.getElementById("btn").addEventListener("click",Calculatesum);
+        document.addEventListener("keydown",function(event)
+        {
+            
+if(event.key==="Enter")
+{
+    event.preventDefault();
+    Calculatesum();
+}
+        });
+        
+        function Calculatesum(){
+             let a=document.getElementById("number1").value;
+        let b=Number(a);
+        let sum1=0;
+       
+            for(let i=1;i<=b;i++)
+        {
+ sum1=sum1+i;
+        }
+         document.getElementById("res").innerHTML="THE SUM OF"+" "+b+" NATUTRAL NUMBERS IS"+" "+sum1;
+        }
+        
+    </script>
+    
+</body>
+</html>
